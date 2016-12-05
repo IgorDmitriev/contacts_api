@@ -50,4 +50,7 @@ group :development do
 
   gem 'addressable'
   gem 'rest-client'
+
+  gem 'faker'
+  gem 'annotate'
 end
