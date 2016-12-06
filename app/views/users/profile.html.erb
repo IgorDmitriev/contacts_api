@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>User Profile</title>
+  </head>
+  <body>
+    <h1>User Profile: <%= @user.username %></h1>
+    <table>
+      <tname><h3>Owned Contacts:</h3></tname>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Owner</th>
+      <% @user.contacts.each do |contact| %>
+        <tr>
+          <td><%= contact.name %></td>
+          <td><%= contact.email %></td>
+          <td><%= link_to contact.owner.username, contact.owner %></td>
+          <td><%= link_to 'Show', contact %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <table>
+      <tname><h3>Shared Contacts:</h3></tname>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Owner</th>
+      <% @user.shared_contacts.each do |contact| %>
+        <tr>
+          <td><%= contact.name %></td>
+          <td><%= contact.email %></td>
+          <td><%= link_to contact.owner.username, contact.owner %></td>
+          <td><%= link_to 'Show', contact %></td>
+          <td><%= button_to('Delete', contact,
+              method: "delete", remote: true,
+              data: { confirm: 'Are you sure?' }) %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <table>
+      <tname><h3>Comments:</h3></tname>
+      <tr>
+        <th>Text</th>
+        <th>Owner</th>
+      <% @user.comments.each do |comment| %>
+        <tr>
+          <td><%= comment.text %></td>
+          <td><%= link_to comment.author.username, comment.author %></td>
+          <td><%= link_to 'Show', comment %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <table>
+      <tname><h3>Authored comments:</h3></tname>
+      <tr>
+        <th>Text</th>
+        <th>Target</th>
+      <% @user.authored_comments.each do |comment| %>
+        <tr>
+          <td><%= comment.text %></td>
+          <td><%= link_to "#{comment.target_type} #{comment.target_id}", comment.target %></td>
+          <td><%= link_to 'Show', comment %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <footer style="margin-top:50px">
+      <%= link_to 'All users', users_path %>
+    </footer>
+  </body>
+</html>

@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
 
+  resources :posts
   resources :comments
   resources :users, only: [:index, :show, :destroy, :update, :create] do
     resources :contacts, only: :index
+    resources :comments, only: :index
   end
-  resources :contacts, only: [:show, :destroy, :update, :create]
-  resources :contact_shares, only: [:create, :destroy]
+  resources :contacts, only: [:show, :destroy, :update, :create] do
+    resources :comments, only: :index
+  end
+  resources :contact_shares, only: [:index, :create, :destroy]
 
   # resource :users
 

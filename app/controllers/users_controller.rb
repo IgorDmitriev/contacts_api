@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users
+    # render json: @users
   end
 
   def new
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    render json: @user
+    render 'profile'
   end
 
   def update
@@ -41,6 +41,10 @@ class UsersController < ApplicationController
     @user.destroy
 
     render json: @user
+  end
+
+  def delete_contact_share_for(contact)
+    
   end
 
   private

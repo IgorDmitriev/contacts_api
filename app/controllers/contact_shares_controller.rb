@@ -1,4 +1,11 @@
 class ContactSharesController < ApplicationController
+  def index
+    @contact_shares = ContactShare.all
+
+    render json: @contact_shares
+  end
+
+
   def create
     @contact_share = ContactShare.new(contact_share_params)
 
